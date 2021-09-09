@@ -1,0 +1,40 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.github.anacarol-costa'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+ext{
+	set('springCloudVersion', "Hoxton.SR3")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch:2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.5.4'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.4'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.3'
+	testImplementation ('org.springframework.boot:spring-boot-starter-test:2.5.4') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	implementation group: 'redis.clients', name: 'jedis', version: '3.7.0'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
